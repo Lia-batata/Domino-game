@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://sisqsp45jnw0"]
 
+[ext_resource type="Script" uid="uid://bwgaohoovapbx" path="res://FileSystem/scripts/WelcomeMenu.cs" id="1_d7nl7"]
+
 [sub_resource type="Gradient" id="Gradient_ocd5x"]
 offsets = PackedFloat32Array(0, 0.9939759)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
@@ -46,6 +48,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
+script = ExtResource("1_d7nl7")
 
 [node name="Label" type="Label" parent="MainMenu/MenuTab" unique_id=1841218078]
 layout_mode = 2
