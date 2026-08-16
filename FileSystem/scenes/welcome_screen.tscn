@@ -1,5 +1,17 @@
 [gd_scene format=3 uid="uid://sisqsp45jnw0"]
 
+[ext_resource type="Script" uid="uid://bwgaohoovapbx" path="res://FileSystem/scripts/WelcomeMenu.cs" id="1_d7nl7"]
+[ext_resource type="Script" uid="uid://b146sret870mk" path="res://FileSystem/scripts/MenuTab.cs" id="1_riyu0"]
+[ext_resource type="Script" uid="uid://cyfk4oau05qx4" path="res://FileSystem/scripts/MenuPlayButton.cs" id="3_nkv3e"]
+[ext_resource type="PackedScene" uid="uid://csw2ywneetk0d" path="res://FileSystem/scenes/scene_0.tscn" id="4_nkv3e"]
+
+[sub_resource type="Gradient" id="Gradient_ocd5x"]
+offsets = PackedFloat32Array(0, 0.9939759)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s1fef"]
+gradient = SubResource("Gradient_ocd5x")
+
 [node name="WelcomeScreen" type="Node3D" unique_id=35230778]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1093184810]
@@ -20,3 +32,52 @@ size = Vector3(10, 0.5, 10)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1979947543]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700117, 0)
+
+[node name="MainMenu" type="CanvasLayer" parent="." unique_id=1998123779]
+script = ExtResource("1_d7nl7")
+
+[node name="MenuTab" type="TextureRect" parent="MainMenu" unique_id=927908713]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_s1fef")
+script = ExtResource("1_riyu0")
+
+[node name="Menu" type="VBoxContainer" parent="MainMenu/MenuTab" unique_id=453646793]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 639.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="MainMenu/MenuTab/Menu" unique_id=1841218078]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Domino"
+
+[node name="Play" type="Button" parent="MainMenu/MenuTab/Menu" unique_id=1904170102]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Play"
+script = ExtResource("3_nkv3e")
+SceneToSwitchTo = ExtResource("4_nkv3e")
+
+[node name="Settings" type="Button" parent="MainMenu/MenuTab/Menu" unique_id=702642816]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="Quit Game" type="Button" parent="MainMenu/MenuTab/Menu" unique_id=732377037]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit Game"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/MenuTab/Menu" unique_id=579149094]
+layout_mode = 2
