@@ -3,27 +3,56 @@ using System;
 
 public partial class MenuTab : TextureRect
 {
-	// Called when the node enters the scene tree for the first time.
-	private MainMenuManager mainMenu;
+	private WelcomeMenu mainMenu;
 
-	public override void _Ready(){
-		if(GetParent()is WelcomeMenu) {
-			mainMenu = GetParent() as WelcomeMenu; 
+	public override void _Ready()
+	{
+		mainMenu = GetParent() as WelcomeMenu;
+
+		if (mainMenu == null)
+		{
+			GD.PrintErr(
+                "ERRO: MenuTab não encontrou WelcomeMenu no nó pai."
+			);
 		}
 	}
 
-	public void OnMenuSwapButtonPressed(int swapIndex){
+	public void OnMenuSwapButtonPressed(int swapIndex)
+	{
+		if (mainMenu == null)
+			return;
+
 		mainMenu.SwapMenu(swapIndex, GetIndex());
 		Visible = false;
 	}
 
-	public void OnMenuReturnButtonPressed(){
+	public void OnMenuReturnButtonPressed()
+	{
+		if (mainMenu == null)
+			return;
+
 		mainMenu.SwapMenuToPrevious();
 		Visible = false;
 	}
 
-	public void LoadSceneRequest(PackedScene loadScene){
+	public void LoadSceneRequest(PackedScene loadScene)
+	{
+		if (mainMenu == null)
+		{
+			GD.PrintErr(
+                "ERRO: MenuTab não possui referência ao WelcomeMenu."
+			);
+			return;
+		}
+
+		if (loadScene == null)
+		{
+			GD.PrintErr(
+                "ERRO: Nenhuma cena foi configurada no botão Play."
+			);
+			return;
+		}
+
 		mainMenu.OnSwapScene(loadScene);
 	}
-
 }

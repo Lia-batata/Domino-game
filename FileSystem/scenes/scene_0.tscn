@@ -1,3 +1,20 @@
 [gd_scene format=3 uid="uid://csw2ywneetk0d"]
 
 [node name="Node3D" type="Node3D" unique_id=1280406492]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1037926429]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1324506693]
+transform = Transform3D(1, 0, 0, 0, 0.19052973, 0.98168147, 0, -0.98168147, 0.19052973, 0, 4.027417, 3.0528045)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=411166007]
+transform = Transform3D(0.59605783, -0.5859853, 0.5489411, 0, 0.6836626, 0.72979826, -0.80294156, -0.43500194, 0.40750238, 3.4408274, 2.3774838, 2.7370005)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1312397312]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGMesh3D" unique_id=566294936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0064926147, -0.063690186, -0.0061035156)
+size = Vector3(10, 0.5, 10)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1438504364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3310337, 0)
