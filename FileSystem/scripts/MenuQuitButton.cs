@@ -3,13 +3,13 @@ using System;
 
 public partial class MenuQuitButton : Button
 {
-    public override void _Ready()
-    {
-        Pressed += OnQuitButtonPressed;
-    }
+	public override void _Ready()
+	{
+		Pressed += OnQuitButtonPressed;
+	}
 
-    private void OnQuitButtonPressed()
-    {
-        GetTree().Quit();
-    }
+	private void OnQuitButtonPressed()
+	{
+		GetTree().Quit();
+	}
 }
