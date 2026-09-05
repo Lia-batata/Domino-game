@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b146sret870mk" path="res://FileSystem/scripts/MenuTab.cs" id="1_riyu0"]
 [ext_resource type="Script" uid="uid://cyfk4oau05qx4" path="res://FileSystem/scripts/MenuPlayButton.cs" id="3_nkv3e"]
 [ext_resource type="PackedScene" uid="uid://csw2ywneetk0d" path="res://FileSystem/scenes/scene_0.tscn" id="4_nkv3e"]
+[ext_resource type="Script" uid="uid://ft8klt1tkwq0" path="res://FileSystem/scripts/MenuQuitButton.cs" id="5_p6un7"]
 
 [sub_resource type="Gradient" id="Gradient_ocd5x"]
 offsets = PackedFloat32Array(0, 0.9939759)
@@ -78,6 +79,7 @@ text = "Settings"
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Quit Game"
+script = ExtResource("5_p6un7")
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu/MenuTab/Menu" unique_id=579149094]
 layout_mode = 2
