@@ -37,10 +37,11 @@ public partial class WelcomeMenu : CanvasLayer
 			return;
 		}
 
-		Node newScene = loadScene.Instantiate();
+		Error result = GetTree().ChangeSceneToPacked(loadScene);
 
-		GetTree().Root.AddChild(newScene);
-
-		QueueFree();
+		if (result != Error.Ok)
+		{
+			GD.PrintErr("ERRO ao trocar de cena: " + result);
+		}
 	}
 }
