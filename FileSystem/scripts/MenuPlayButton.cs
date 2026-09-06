@@ -16,6 +16,7 @@ public partial class MenuPlayButton : Button
 		if (GetParent().GetParent() is MenuTab menuTab)
 		{
 			menuTab.LoadSceneRequest(SceneToSwitchTo);
+			gameManager.StartMatch(StockMode.Fechado, 100);
 		}
 	}
 }
