@@ -1,24 +1,42 @@
 [gd_scene format=3 uid="uid://csw2ywneetk0d"]
 
-[ext_resource type="Script" uid="uid://o3i8lm6l0lxy" path="res://FileSystem/scripts/GameManager.cs" id="1_ccfhu"]
-[ext_resource type="Script" uid="uid://017fnppisuqu" path="res://FileSystem/scripts/CameraController.cs" id="2_45shs"]
+[ext_resource type="Script" uid="uid://cp2521rkb42hy" path="res://FileSystem/scripts/PlayerController.cs" id="1_ccfhu"]
 
-[node name="MainScene" type="Node3D" unique_id=1280406492]
+[sub_resource type="PlaneMesh" id="PlaneMesh_duv0q"]
 
-[node name="DominoTable" type="Node3D" parent="." unique_id=2009152100]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ccfhu"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[node name="TableMesh" type="CSGBox3D" parent="DominoTable" unique_id=1362533461]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_duv0q"]
 
-[node name="PlayerChair" type="Node3D" parent="DominoTable" unique_id=1295072837]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_duv0q"]
 
-[node name="PlayerHeadSeatMarker" type="Marker3D" parent="DominoTable/PlayerChair" unique_id=1657809959]
+[node name="RoomScene" type="Node3D" unique_id=1280406492]
 
-[node name="PlayerCharacter" type="CharacterBody3D" parent="." unique_id=609566849]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1115235014]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
+mesh = SubResource("PlaneMesh_duv0q")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerCharacter" unique_id=1216674194]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=656181640]
 
-[node name="GameManager" type="Node3D" parent="." unique_id=1319592958]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1279624219]
+shape = SubResource("ConcavePolygonShape3D_ccfhu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1416853088]
+transform = Transform3D(-0.3444197, 0.9388158, 0, -0.011064907, -0.004059339, 0.99993056, 0.93875057, 0.3443958, 0.011786025, 0, 8.836641, 0)
+
+[node name="PlayerCharacter" type="CharacterBody3D" parent="." unique_id=1368785888 node_paths=PackedStringArray("SpringArm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9441495, 0)
 script = ExtResource("1_ccfhu")
+SpringArm = NodePath("SpringArm3D")
 
-[node name="CameraController" type="Camera3D" parent="." unique_id=820759406]
-script = ExtResource("2_45shs")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerCharacter" unique_id=710949983]
+mesh = SubResource("CapsuleMesh_duv0q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCharacter" unique_id=1975550485]
+shape = SubResource("CapsuleShape3D_duv0q")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCharacter" unique_id=1948749724]
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="PlayerCharacter/SpringArm3D" unique_id=1377134847]
