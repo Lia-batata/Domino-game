@@ -66,3 +66,5 @@ surface_material_override/1 = SubResource("StandardMaterial3D_pjnnb")
 surface_material_override/2 = SubResource("StandardMaterial3D_4xnyo")
 surface_material_override/3 = SubResource("StandardMaterial3D_u14ea")
 surface_material_override/4 = SubResource("StandardMaterial3D_2et8h")
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=616141400]
