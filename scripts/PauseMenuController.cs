@@ -1,11 +1,10 @@
 using Godot;
 using System;
 
-public partial class PauseMenuController : Control
+public partial class PauseMenuController : CanvasLayer
 {
 	[ExportGroup("Referências de Cenas e Painéis")]
-	[Export] private PackedScene mainMenuScene; 
-	[Export] private Control settingsPanel;     // O painel 2D de configurações
+	[Export] private Control settingsPanel; 
 
 	[ExportGroup("Botões do Menu de Pausa")]
 	[Export] private Button resumeButton;
@@ -72,27 +71,30 @@ public partial class PauseMenuController : Control
 		}
 	}
 	private void OnMainMenuButtonPressed()
-    {
-        // IMPORTANTE: Despausa o jogo antes de trocar de cena, senão a próxima cena nasce travada!
-        GetTree().Paused = false;
-        Input.MouseMode = Input.MouseModeEnum.Visible;
+	{
+		// Despausa o jogo e libera o mouse
+		GetTree().Paused = false;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 
-        if (mainMenuScene != null)
-        {
-            Error result = GetTree().ChangeSceneToPacked(mainMenuScene);
-            if (result != Error.Ok)
-            {
-                GD.PrintErr("ERRO ao voltar para o Menu Principal: " + result);
-            }
-        }
-        else
-        {
-            GD.PrintErr("ERRO: A PackedScene do Menu Principal não foi configurada no Inspector.");
-        }
-    }
+		string caminhoMenu = "res://scenes/welcome_screen.tscn"; 
 
-    private void OnQuitButtonPressed()
-    {
-        GetTree().Quit();
-    }
+		var mainMenuScene = GD.Load<PackedScene>(caminhoMenu);
+		if (mainMenuScene != null)
+		{
+			Error result = GetTree().ChangeSceneToPacked(mainMenuScene);
+			if (result != Error.Ok)
+			{
+				GD.PrintErr("ERRO ao trocar para o Menu Principal: " + result);
+			}
+		}
+		else
+		{
+			GD.PrintErr("ERRO: Não foi possível encontrar a cena em: " + caminhoMenu);
+		}
+	}
+
+	private void OnQuitButtonPressed()
+	{
+		GetTree().Quit();
+	}
 }
