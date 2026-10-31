@@ -31,44 +31,68 @@ public partial class PauseMenuController : Control
 		if (quitButton != null) quitButton.Pressed += OnQuitButtonPressed;
 	}
 	public override void _UnhandledInput(InputEvent @event)
-    {
-        // Detecta a tecla ESC (ação "ui_cancel") para abrir/fechar o menu de pausa
-        if (@event.IsActionPressed("ui_cancel"))
-        {
-            TogglePause();
-        }
-    }
+	{
+		// Detecta a tecla ESC (ação "ui_cancel") para abrir/fechar o menu de pausa
+		if (@event.IsActionPressed("ui_cancel"))
+		{
+			TogglePause();
+		}
+	}
 	public void TogglePause()
-    {
-        isPaused = !isPaused;
-        Visible = isPaused;
-        GetTree().Paused = isPaused; // Pausa/despausa o mundo 3D do jogo
+	{
+		isPaused = !isPaused;
+		Visible = isPaused;
+		GetTree().Paused = isPaused; // Pausa/despausa o mundo 3D do jogo
 
-        if (isPaused)
+		if (isPaused)
+		{
+			// Libera o mouse para poder clicar nos botões do menu
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else
+		{
+			// Retoma a captura do mouse para o gameplay
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+			
+			// Fecha o painel de configurações se o jogador voltar ao jogo
+			if (settingsPanel != null)
+				settingsPanel.Visible = false;
+		}
+	}
+	private void OnSettingsButtonPressed()
+	{
+		if (settingsPanel != null)
+		{
+			// Alterna a visibilidade do painel 2D de configurações
+			settingsPanel.Visible = !settingsPanel.Visible;
+		}
+		else
+		{
+			GD.PrintErr("ERRO: Painel de configurações não foi atribuído no PauseMenuController.");
+		}
+	}
+	private void OnMainMenuButtonPressed()
+    {
+        // IMPORTANTE: Despausa o jogo antes de trocar de cena, senão a próxima cena nasce travada!
+        GetTree().Paused = false;
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        if (mainMenuScene != null)
         {
-            // Libera o mouse para poder clicar nos botões do menu
-            Input.MouseMode = Input.MouseModeEnum.Visible;
+            Error result = GetTree().ChangeSceneToPacked(mainMenuScene);
+            if (result != Error.Ok)
+            {
+                GD.PrintErr("ERRO ao voltar para o Menu Principal: " + result);
+            }
         }
         else
         {
-            // Retoma a captura do mouse para o gameplay
-            Input.MouseMode = Input.MouseModeEnum.Captured;
-            
-            // Fecha o painel de configurações se o jogador voltar ao jogo
-            if (settingsPanel != null)
-                settingsPanel.Visible = false;
+            GD.PrintErr("ERRO: A PackedScene do Menu Principal não foi configurada no Inspector.");
         }
     }
-	private void OnSettingsButtonPressed()
+
+    private void OnQuitButtonPressed()
     {
-        if (settingsPanel != null)
-        {
-            // Alterna a visibilidade do painel 2D de configurações
-            settingsPanel.Visible = !settingsPanel.Visible;
-        }
-        else
-        {
-            GD.PrintErr("ERRO: Painel de configurações não foi atribuído no PauseMenuController.");
-        }
+        GetTree().Quit();
     }
 }
