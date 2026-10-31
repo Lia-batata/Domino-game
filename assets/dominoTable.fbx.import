@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bll8a02o4f51g"
-path="res://.godot/imported/dominoTable.fbx-8f80e1bda820a47680b8a6ca23d569ed.scn"
+path="res://.godot/imported/dominoTable.fbx-0ee31f8d01d03fdc6b003c6254e1450a.scn"
 
 [deps]
 
-source_file="res://FileSystem/assets/dominoTable.fbx"
-dest_files=["res://.godot/imported/dominoTable.fbx-8f80e1bda820a47680b8a6ca23d569ed.scn"]
+source_file="res://assets/dominoTable.fbx"
+dest_files=["res://.godot/imported/dominoTable.fbx-0ee31f8d01d03fdc6b003c6254e1450a.scn"]
 
 [params]
 

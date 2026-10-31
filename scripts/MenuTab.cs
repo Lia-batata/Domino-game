@@ -23,7 +23,7 @@ public partial class MenuTab : TextureRect
 			return;
 
 		mainMenu.SwapMenu(swapIndex, GetIndex());
-		Visible = false;
+	Visible = false;
 	}
 
 	public void OnMenuReturnButtonPressed()

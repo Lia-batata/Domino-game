@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://csw2ywneetk0d"]
+
+[ext_resource type="Script" uid="uid://cp2521rkb42hy" path="res://scripts/PlayerController.cs" id="1_p2ku2"]
+[ext_resource type="ArrayMesh" uid="uid://brk08gy60iah5" path="res://assets/Untitled.obj" id="2_yk7fa"]
+[ext_resource type="Texture2D" uid="uid://b8vutk7g55xn2" path="res://assets/MesaDominóUVtexturizada.png" id="3_tj2k1"]
+[ext_resource type="Script" uid="uid://wskv7e8sbsce" path="res://scripts/PauseMenuController.cs" id="4_ggw5e"]
+[ext_resource type="Script" uid="uid://ft8klt1tkwq0" path="res://scripts/MenuQuitButton.cs" id="5_du1ik"]
+[ext_resource type="PackedScene" uid="uid://sisqsp45jnw0" path="res://scenes/welcome_screen.tscn" id="5_yk7fa"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_duv0q"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ccfhu"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_duv0q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_duv0q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrrwd"]
+albedo_texture = ExtResource("3_tj2k1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vky64"]
+albedo_texture = ExtResource("3_tj2k1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1da4"]
+albedo_texture = ExtResource("3_tj2k1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x82im"]
+albedo_texture = ExtResource("3_tj2k1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8h6qy"]
+albedo_texture = ExtResource("3_tj2k1")
+
+[sub_resource type="Gradient" id="Gradient_ocd5x"]
+offsets = PackedFloat32Array(0, 0.9939759)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a3uq1"]
+gradient = SubResource("Gradient_ocd5x")
+
+[node name="RoomScene" type="Node3D" unique_id=1280406492]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1115235014]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
+mesh = SubResource("PlaneMesh_duv0q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=656181640]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1279624219]
+shape = SubResource("ConcavePolygonShape3D_ccfhu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1416853088]
+transform = Transform3D(-0.3444197, 0.9388158, 0, -0.011064907, -0.004059339, 0.99993056, 0.93875057, 0.3443958, 0.011786025, 0, 8.836641, 0)
+
+[node name="PlayerCharacter" type="CharacterBody3D" parent="." unique_id=1368785888 node_paths=PackedStringArray("SpringArm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9441495, 0)
+script = ExtResource("1_p2ku2")
+SpringArm = NodePath("SpringArm3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerCharacter" unique_id=710949983]
+mesh = SubResource("CapsuleMesh_duv0q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCharacter" unique_id=1975550485]
+shape = SubResource("CapsuleShape3D_duv0q")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCharacter" unique_id=1948749724]
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="PlayerCharacter/SpringArm3D" unique_id=1377134847]
+
+[node name="table" type="MeshInstance3D" parent="." unique_id=1868995763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1197186, 0, 0)
+mesh = ExtResource("2_yk7fa")
+surface_material_override/0 = SubResource("StandardMaterial3D_hrrwd")
+surface_material_override/1 = SubResource("StandardMaterial3D_vky64")
+surface_material_override/2 = SubResource("StandardMaterial3D_b1da4")
+surface_material_override/3 = SubResource("StandardMaterial3D_x82im")
+surface_material_override/4 = SubResource("StandardMaterial3D_8h6qy")
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=616141400 node_paths=PackedStringArray("resumeButton", "settingsButton", "mainMenuButton", "quitButton")]
+script = ExtResource("4_ggw5e")
+mainMenuScene = ExtResource("5_yk7fa")
+resumeButton = NodePath("MenuTab/Menu/Continue")
+settingsButton = NodePath("MenuTab/Menu/Settings")
+mainMenuButton = NodePath("MenuTab/Menu/Main Menu")
+quitButton = NodePath("MenuTab/Menu/Quit Game")
+
+[node name="MenuTab" type="TextureRect" parent="PauseMenu" unique_id=2093938536]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_a3uq1")
+
+[node name="Menu" type="VBoxContainer" parent="PauseMenu/MenuTab" unique_id=1720744312]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.19895834
+anchor_bottom = 1.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="PauseMenu/MenuTab/Menu" unique_id=1283977586]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Domino"
+
+[node name="Continue" type="Button" parent="PauseMenu/MenuTab/Menu" unique_id=960758093]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Continue"
+
+[node name="Settings" type="Button" parent="PauseMenu/MenuTab/Menu" unique_id=2118206701]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="Main Menu" type="Button" parent="PauseMenu/MenuTab/Menu" unique_id=429476889]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Main Menu"
+
+[node name="Quit Game" type="Button" parent="PauseMenu/MenuTab/Menu" unique_id=1412029332]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit Game"
+script = ExtResource("5_du1ik")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu/MenuTab/Menu" unique_id=189729170]
+layout_mode = 2

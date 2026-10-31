@@ -1,10 +1,27 @@
 [gd_scene format=3 uid="uid://sisqsp45jnw0"]
 
-[ext_resource type="Script" uid="uid://bwgaohoovapbx" path="res://FileSystem/scripts/WelcomeMenu.cs" id="1_d7nl7"]
-[ext_resource type="Script" uid="uid://b146sret870mk" path="res://FileSystem/scripts/MenuTab.cs" id="1_riyu0"]
-[ext_resource type="Script" uid="uid://cyfk4oau05qx4" path="res://FileSystem/scripts/MenuPlayButton.cs" id="3_nkv3e"]
-[ext_resource type="PackedScene" uid="uid://csw2ywneetk0d" path="res://FileSystem/scenes/scene_0.tscn" id="4_nkv3e"]
-[ext_resource type="Script" uid="uid://ft8klt1tkwq0" path="res://FileSystem/scripts/MenuQuitButton.cs" id="5_p6un7"]
+[ext_resource type="ArrayMesh" uid="uid://brk08gy60iah5" path="res://assets/Untitled.obj" id="1_0pr2k"]
+[ext_resource type="Script" uid="uid://bwgaohoovapbx" path="res://scripts/WelcomeMenu.cs" id="1_d7nl7"]
+[ext_resource type="Script" uid="uid://b146sret870mk" path="res://scripts/MenuTab.cs" id="1_riyu0"]
+[ext_resource type="Texture2D" uid="uid://b8vutk7g55xn2" path="res://assets/MesaDominóUVtexturizada.png" id="2_8jkbe"]
+[ext_resource type="Script" uid="uid://cyfk4oau05qx4" path="res://scripts/MenuPlayButton.cs" id="3_nkv3e"]
+[ext_resource type="PackedScene" uid="uid://csw2ywneetk0d" path="res://scenes/scene_0.tscn" id="4_nkv3e"]
+[ext_resource type="Script" uid="uid://ft8klt1tkwq0" path="res://scripts/MenuQuitButton.cs" id="5_p6un7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqi17"]
+albedo_texture = ExtResource("2_8jkbe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plkes"]
+albedo_texture = ExtResource("2_8jkbe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d04wu"]
+albedo_texture = ExtResource("2_8jkbe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nelrv"]
+albedo_texture = ExtResource("2_8jkbe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvc6x"]
+albedo_texture = ExtResource("2_8jkbe")
 
 [sub_resource type="Gradient" id="Gradient_ocd5x"]
 offsets = PackedFloat32Array(0, 0.9939759)
@@ -31,8 +48,14 @@ near = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0064926147, -0.063690186, -0.0061035156)
 size = Vector3(10, 0.5, 10)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1979947543]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700117, 0)
+[node name="table" type="MeshInstance3D" parent="." unique_id=1329579748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1197186, 0, 0)
+mesh = ExtResource("1_0pr2k")
+surface_material_override/0 = SubResource("StandardMaterial3D_qqi17")
+surface_material_override/1 = SubResource("StandardMaterial3D_plkes")
+surface_material_override/2 = SubResource("StandardMaterial3D_d04wu")
+surface_material_override/3 = SubResource("StandardMaterial3D_nelrv")
+surface_material_override/4 = SubResource("StandardMaterial3D_lvc6x")
 
 [node name="MainMenu" type="CanvasLayer" parent="." unique_id=1998123779]
 script = ExtResource("1_d7nl7")
