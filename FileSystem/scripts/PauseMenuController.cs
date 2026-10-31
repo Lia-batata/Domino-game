@@ -59,4 +59,16 @@ public partial class PauseMenuController : Control
                 settingsPanel.Visible = false;
         }
     }
+	private void OnSettingsButtonPressed()
+    {
+        if (settingsPanel != null)
+        {
+            // Alterna a visibilidade do painel 2D de configurações
+            settingsPanel.Visible = !settingsPanel.Visible;
+        }
+        else
+        {
+            GD.PrintErr("ERRO: Painel de configurações não foi atribuído no PauseMenuController.");
+        }
+    }
 }
